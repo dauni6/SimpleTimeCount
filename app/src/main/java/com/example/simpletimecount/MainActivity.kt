@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
+import android.widget.Toast
 import com.example.simpletimecount.databinding.ActivityMainBinding
 
 const val DELAY_INTERVAL = 1000L
@@ -42,6 +43,11 @@ class MainActivity : AppCompatActivity() {
             if (state == TimeState.STOP) {
                 startTimeCount()
                 state = TimeState.START
+                Toast.makeText(this@MainActivity, "START", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (state == TimeState.START || state == TimeState.RESUME) {
+                Toast.makeText(this@MainActivity, "it's already started.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -49,6 +55,11 @@ class MainActivity : AppCompatActivity() {
             if (state == TimeState.START || state == TimeState.RESUME) {
                 pauseTimeCount()
                 state = TimeState.PAUSE
+                Toast.makeText(this@MainActivity, "PAUSE", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (state == TimeState.PAUSE) {
+                Toast.makeText(this@MainActivity, "it's already paused.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -56,6 +67,11 @@ class MainActivity : AppCompatActivity() {
             if (state == TimeState.PAUSE) {
                 resumeTimeCount()
                 state = TimeState.RESUME
+                Toast.makeText(this@MainActivity, "RESUME", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (state == TimeState.RESUME) {
+                Toast.makeText(this@MainActivity, "it's already resumed.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -63,6 +79,11 @@ class MainActivity : AppCompatActivity() {
             if (state == TimeState.START || state == TimeState.PAUSE || state == TimeState.RESUME) {
                 stopTimeCount()
                 state = TimeState.STOP
+                Toast.makeText(this@MainActivity, "STOP", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (state == TimeState.STOP) {
+                Toast.makeText(this@MainActivity, "it's already stopped.", Toast.LENGTH_SHORT).show()
             }
         }
 
